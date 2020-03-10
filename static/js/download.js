@@ -1,4 +1,4 @@
-export default {
+let download = {
   // 将一个sheet转成最终的excel文件的blob对象，然后利用URL.createObjectURL下载
   /**
    * 下载excel文件，通过sheet内容下载
@@ -132,3 +132,6 @@ export default {
   //     });
   // },
 }
+export {
+  download
+};

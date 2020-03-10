@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import download from "../../static/js/download";
+import { download } from "../../static/js/download";
 export default {
     name: "hello",
     data() {
