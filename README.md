@@ -19,3 +19,5 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+引入静态js文件在static/upload里面  upload写错了，应该是download
