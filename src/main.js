@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import lodash from 'lodash'
 Vue.config.productionTip = false
-Vue.prototype._ = lodash
+Vue.prototype._ = lodash // 在原型上绑定lodash
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -1,11 +1,15 @@
 <template>
     <div id="app">
+        <!-- 支持表格合并的导出 代码较多 -->
         <HelloWorld />
+        <!-- 普通导出 和主流ui库的table组件数据兼容较好 -->
+        <NewWord />
     </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld";
+import NewWord from "./components/newWord";
 window.__proto__.arraySiteNum = function(array, site) {
     let siteNum = 0;
     for (var i of array) {
@@ -18,7 +22,8 @@ window.__proto__.arraySiteNum = function(array, site) {
 export default {
     name: "App",
     components: {
-        HelloWorld
+        HelloWorld,
+        NewWord
     }
 };
 </script>

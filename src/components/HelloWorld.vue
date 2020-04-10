@@ -18,8 +18,15 @@ export default {
         };
     },
     methods: {
-        // 下载文件
         uploadFile() {
+            /**
+             * @description 下载文件 用于处理数据
+             * @author mrp
+             * @date 2020-04-08
+             * @update mrp(2020-04-08)
+             * @params {void}
+             * @return {void}
+             */
             var allNum = [
                 {
                     姓名: "张三",
@@ -30,7 +37,7 @@ export default {
                 { 姓名: "李四", 性别: "女", 年龄: 19, 注册时间: "2019/12/12" },
                 { 姓名: "王五", 性别: "男", 年龄: 20, 注册时间: "2019/11/08" },
                 { 姓名: "赵六", 性别: "女", 年龄: 22, 注册时间: "2020/10/10" }
-            ];
+            ]; // 表格内容
             var allNum1 = [
                 { 学号: "00001", 姓名: "张三", 性别: "男", 分数: 90 },
                 { 学号: "00002", 姓名: "李四", 性别: "女", 分数: 60 },
@@ -47,18 +54,25 @@ export default {
                 ["测试合并", "在中间", null, "会不会有问题"], // 试试合并在中间
                 ["测试合并", "在最后", "会不会有问题", null], // 试试尾部合并
                 ["测试如果", "多几列", "合并会不会", null, null, "有问题"] // 试试错误数据合并
-            ];
+            ]; // 表头信息，如果没有就是空
             var aoa1 = [];
             download.openDownloadDialog(
                 download.sheet2blob([
-                    this.createSheet(allNum, aoa, "sheet1")
-                    // this.createSheet(allNum1, aoa1, "sheet2")
+                    this.createSheet(allNum, aoa, "sheet1"),
+                    this.createSheet(allNum1, aoa1, "sheet2")
                 ]), // 批量导出数据 sheetName要不同，不然会导出失败，报错
                 "导出.xlsx" // 导出表格的文件名
             );
         },
-        // 生成sheet文件与sheetName
         createSheet(data, aoa, sheetName) {
+            /**
+             * @description 生成sheet文件
+             * @author mrp
+             * @date 2020-04-08
+             * @update mrp(2020-04-08)
+             * @params data{Array} 表格数据 aoa{Array} 表头数据 sheetName{String} sheet名
+             * @return Object { sheetData{Object} sheet类型的对象 sheetName{String} sheet名 }
+             */
             var topDateNum = aoa.length;
             // 数据一般键值对类型数据，需要根据导出格式转换一下
             // 插入的顺序和表格的表头对应起来
@@ -107,8 +121,15 @@ export default {
 
             return { sheetData: sheet, sheetName: sheetName };
         },
-        // 把数据格式[1,2,3,5,6,7,9]=>[[1,2,3],[5,6,7],[9]]
         isNext(arr) {
+            /**
+             * @description 处理数据格式 将相邻的数据组成数组（[1,2,3,5,6,7,9]=>[[1,2,3],[5,6,7],[9]]）
+             * @author mrp
+             * @date 2020-04-08
+             * @update mrp(2020-04-08)
+             * @params arr{Array} 需要处理的数组
+             * @return {void}
+             */
             for (var i = 0; i < arr.length; i++) {
                 this.otherArr.push(arr[i]);
                 if (arr[i + 1] && arr[i + 1] - arr[i] == 1) {
@@ -119,8 +140,15 @@ export default {
                 }
             }
         },
-        // 循环调用isNull方法，判断所有的null值的位置
         isNull(arr) {
+            /**
+             * @description 循环调用方法，判断数据每一个null的位置
+             * @author mrp
+             * @date 2020-04-08
+             * @update mrp(2020-04-08)
+             * @params arr{Array} 需要处理的（表头）数据 判断需要合并（null）的单元格
+             * @return {void}
+             */
             if (_.indexOf(arr, null) > -1) {
                 this.nullStart = _.indexOf(arr, null);
                 this.nullLast += this.nullStart + 1;
