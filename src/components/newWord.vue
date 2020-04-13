@@ -1,11 +1,11 @@
 <template>
     <div>
-        <button @click="uploadFile">普通下载</button>
+        <button title="普通导出，与各种ui组件兼容较好" @click="uploadFile">普通下载</button>
     </div>
 </template>
 
 <script>
-import { download } from "../../static/js/download";
+import { download } from "../../static/js/download"; // 引入导出方法，方法只修改了可以批量导出，代码可能冗余
 export default {
     name: "hello",
     data() {
@@ -45,7 +45,7 @@ export default {
                 gender: "女",
                 createTime: "2020-05-02 11:11:22"
             }
-        ];
+        ]; // 表格文件赋值，一般调用接口获得数据
     },
     methods: {
         uploadFile() {
@@ -53,7 +53,7 @@ export default {
              * @description 下载文件
              * @author mrp
              * @date 2020-04-10
-             * @update mrp(2020-04-10)
+             * @update mrp(2020-04-13) 修改注释的位置
              * @params {void}
              * @return {void}
              */
@@ -63,10 +63,9 @@ export default {
                     this.createSheet(
                         this.studentOfClass1,
                         this.classColumn,
-                        "sheet1"
-                    )
-                    // this.createSheet(allNum1, aoa1, "sheet2")
-                ]), // 批量导出数据时 sheetName要不同，不然会导出失败，报错
+                        "sheet1" // sheet页的名字 批量导出数据时 名字要不同，不然会导出失败，报错
+                    ) // createSheet 生成sheet文件，如果需要批量导出时多调用几次这个方法
+                ]),
                 "导出.xlsx" // 导出表格的文件名
             );
         },

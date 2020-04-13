@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="uploadFile">下载</button>
+        <button title="可以支持表格合并导出" @click="uploadFile">下载</button>
     </div>
 </template>
 
