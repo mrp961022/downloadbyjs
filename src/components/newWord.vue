@@ -79,15 +79,17 @@ export default {
              * @return Object { sheetData{Object} sheet类型的对象 sheetName{String} sheet名 }
              */
 
-            let aoa = (dataKey = []); // 定义导出表头和数据的键值
+            let aoa = [],
+                dataKey = []; // 定义导出表头和数据的键值
             aoa.push([]); // 第一行为表头信息
             column.map(item => {
                 aoa[0].push(item.label); // 遍历表头信息设置导出表头内容
                 dataKey.push(item.key); // 遍历表头信息设置导出数据的键
             });
-            data.map(item => {
+            data.map((item, index) => {
+                aoa[index + 1] = [];
                 dataKey.map(keyItem => {
-                    aoa.push([item[keyItem]]);
+                    aoa[index + 1].push(item[keyItem]);
                 }); // 遍历数据，根据键对应表头
             });
             let sheet = XLSX.utils.aoa_to_sheet(aoa);
