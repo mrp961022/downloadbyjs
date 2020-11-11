@@ -1,11 +1,11 @@
 <template>
     <div>
-        <button title="普通导出，与各种ui组件兼容较好" @click="uploadFile">普通下载</button>
+        <button title="普通导出" @click="uploadFile">普通下载</button>
     </div>
 </template>
 
 <script>
-import { download } from "../../static/js/download"; // 引入导出方法，方法只修改了可以批量导出，代码可能冗余
+import { download } from "@/assets/js/download"; // 引入导出方法，方法只修改了可以批量导出，代码可能冗余
 export default {
     name: "hello",
     data() {

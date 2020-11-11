@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { download } from "../../static/js/download";
+import { download } from "@/assets/js/download";
 export default {
     name: "hello",
     data() {
@@ -59,7 +59,7 @@ export default {
             download.openDownloadDialog(
                 download.sheet2blob([
                     this.createSheet(allNum, aoa, "sheet1"),
-                    this.createSheet(allNum1, aoa1, "sheet2")
+                    // this.createSheet(allNum1, aoa1, "sheet2")
                 ]), // 批量导出数据 sheetName要不同，不然会导出失败，报错
                 "导出.xlsx" // 导出表格的文件名
             );
@@ -93,7 +93,6 @@ export default {
                     this.isNull(item);
                     this.isNext(this.nullList);
                     for (var i in this.newArr) {
-                        // console.log(this.newArr[i])
                         hbLine.push({
                             // 设置某一行的单元格合并（每行只支持一次合并）
                             // s:{r:num,c:num} 开始 ,e:{r:num,c:num} 结束
@@ -118,6 +117,10 @@ export default {
                     item[aoa[topDateNum][3]]
                 ]); // 当你的表头与表格需要显示表头相同时可以直接取表头的信息
             });
+            // hbLine.push({
+            //     s: { r: 15, c: 8 },
+            //     e: { r: 16,c: 9}
+            // })
             var sheet = XLSX.utils.aoa_to_sheet(aoa);
             sheet["!merges"] = hbLine;
 
@@ -132,11 +135,21 @@ export default {
              * @params arr{Array} 需要处理的数组
              * @return {void}
              */
+            /**
+             * 假设arr的值为[1,2,4,5,7] 每次循环发生了什么
+             * otherArr [1] otherArr [1,2] 
+             * otherArr [1,2,2] newArr [[1,2]] otherArr []
+             * otherArr [4] otherArr [4,5] 
+             * otherArr [4,5,5] newArr [[1,2],[4,5]] otherArr []
+             * otherArr [7] newArr [[1,2],[4,5],[7]] otherArr []
+             */
             for (var i = 0; i < arr.length; i++) {
                 this.otherArr.push(arr[i]);
                 if (arr[i + 1] && arr[i + 1] - arr[i] == 1) {
+                    // 判断是否有相邻的null，如果是相邻的，一直往otherArr中push
                     this.otherArr.push(arr[i + 1]);
                 } else {
+                    // 如果不是相邻或者是最后一个，往newArr中push，清空otherArr
                     this.newArr.push(Array.from(new Set(this.otherArr)));
                     this.otherArr = [];
                 }
@@ -151,14 +164,25 @@ export default {
              * @params arr{Array} 需要处理的（表头）数据 判断需要合并（null）的单元格
              * @return {void}
              */
-            if (_.indexOf(arr, null) > -1) {
-                this.nullStart = _.indexOf(arr, null);
+            /**
+             * lodash中使用到的方法
+             * _.indexOf(arr, null) 同js中的indexOf
+             * _.slice(arr, this.nullStart + 1) 同js中的slice
+             */
+            // if (_.indexOf(arr, null) > -1) {
+            //     this.nullStart = _.indexOf(arr, null);
+            //     this.nullLast += this.nullStart + 1;
+            //     this.nullList.push(this.nullLast);
+            //     this.isNull(_.slice(arr, this.nullStart + 1));
+            // }
+            if (arr.indexOf(null)>-1) {
+                this.nullStart = arr.indexOf(null);
                 this.nullLast += this.nullStart + 1;
                 this.nullList.push(this.nullLast);
-                this.isNull(_.slice(arr, this.nullStart + 1));
+                this.isNull(arr.slice(this.nullStart + 1));
             }
         }
-    }
+    },
 };
 </script>
 
