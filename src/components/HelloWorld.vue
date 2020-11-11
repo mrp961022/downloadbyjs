@@ -81,6 +81,7 @@ export default {
                 aoa[topDateNum].push(i); // 当你的表头与表格需要显示表头相同时可以遍历
             }
             var hbLine = [];
+            // 合并单元格 判断是否有相邻的null元素
             aoa.map((item, index) => {
                 if (item.indexOf(null) > -1) {
                     // 每次判断合并行的时候进行一次数据还原
@@ -108,6 +109,7 @@ export default {
                     return;
                 }
             });
+            // 如果表格内容也需要合并的话 可以放在上面的map前面
             data.map(item => {
                 aoa.push([
                     item[aoa[topDateNum][0]],
