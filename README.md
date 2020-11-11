@@ -25,3 +25,5 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 ### `components`中有两个vue文件
 * `newWord.vue`中是最简单的报表下载，没有合并，仅需要有表头和表格体的信息
 * `HelloWorld.vue`中的报表支持行的合并，合并方式是将需要合并的单元格置为`null`
+
+> 在vue-cli3及以上的版本中需要注意静态文件要放在public文件夹中，不然引入不生效
