@@ -46,4 +46,14 @@ sheet["!merges"] = [
 ]
 ```
 
+### 数据转sheet表 XLSX.utils.aoa_to_sheet(aoa)
+```
+// aoa的格式
+let aoa = [
+    ["姓名", "性别", "出生年月", "年龄"],
+    ["王小二", "男", "1999/10/20", new Date().getFullYear()-1999]
+    ["王老大", "女", "1997/10/20", new Date().getFullYear()-1997]
+]
+```
+
 > 在vue-cli3及以上的版本中需要注意静态文件要放在public文件夹中，不然引入不生效

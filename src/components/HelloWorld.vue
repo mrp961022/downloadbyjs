@@ -121,7 +121,9 @@ export default {
             //     s: { r: 15, c: 8 },
             //     e: { r: 16,c: 9}
             // })
+            // 将数据转成sheet表格 数据格式一行一个数组
             var sheet = XLSX.utils.aoa_to_sheet(aoa);
+            // 需要合并的单元格
             sheet["!merges"] = hbLine;
 
             return { sheetData: sheet, sheetName: sheetName };
