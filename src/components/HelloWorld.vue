@@ -110,12 +110,14 @@ export default {
             });
             // 如果表格内容也需要合并的话 可以放在上面的map前面
             data.map(item => {
+                // 当你的表头与表格需要显示表头相同时可以直接取表头的信息
+                // 如果不同请参考newWord.vue的处理方式，表头和表格体分开
                 aoa.push([
                     item[aoa[topDateNum][0]],
                     item[aoa[topDateNum][1]],
                     item[aoa[topDateNum][2]],
                     item[aoa[topDateNum][3]]
-                ]); // 当你的表头与表格需要显示表头相同时可以直接取表头的信息
+                ]); 
             });
             // hbLine.push({
             //     s: { r: 15, c: 8 },
