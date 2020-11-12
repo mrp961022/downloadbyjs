@@ -50,10 +50,10 @@ export default {
              */
             var aoa = [
                 ["主要信息", null, null, "其它信息", null, "中间"], // 特别注意合并的地方后面预留null
-                ["测试行", null, null, null], // 试试合并到头
-                ["测试合并", "在中间", null, "会不会有问题"], // 试试合并在中间
-                ["测试合并", "在最后", "会不会有问题", null], // 试试尾部合并
-                ["测试如果", "多几列", "合并会不会", null, null, "有问题"] // 试试错误数据合并
+                // ["测试行", null, null, null], // 试试合并到头
+                // ["测试合并", "在中间", null, "会不会有问题"], // 试试合并在中间
+                // ["测试合并", "在最后", "会不会有问题", null], // 试试尾部合并
+                // ["测试如果", "多几列", "合并会不会", null, null, "有问题"] // 试试错误数据合并
             ]; // 表头信息，如果没有就是空
             var aoa1 = [];
             download.openDownloadDialog(
@@ -131,7 +131,7 @@ export default {
              * @description 处理数据格式 将相邻的数据组成数组（[1,2,3,5,6,7,9]=>[[1,2,3],[5,6,7],[9]]）
              * @author mrp
              * @date 2020-04-08
-             * @update mrp(2020-04-08)
+             * @update mrp(2020-11-11) 增加注释
              * @params arr{Array} 需要处理的数组
              * @return {void}
              */
@@ -160,9 +160,16 @@ export default {
              * @description 循环调用方法，判断数据每一个null的位置
              * @author mrp
              * @date 2020-04-08
-             * @update mrp(2020-04-08)
+             * @update mrp(2020-11-12) 增加注释
              * @params arr{Array} 需要处理的（表头）数据 判断需要合并（null）的单元格
              * @return {void}
+             */
+            /**
+             * 根据每一次null的位置回调函数直到没有null为止
+             * 例如 arr [1,2,3,null,4,null,5]
+             * 第一次 [1,2,3,null,4,null,5] nullStart 3 nullLast 3 nullList [3]
+             * 第二次[4,null,5] nullStart 1 nullLast 5 nullList [3,5]
+             * 第三次[5]
              */
             /**
              * lodash中使用到的方法
@@ -178,6 +185,7 @@ export default {
             if (arr.indexOf(null)>-1) {
                 this.nullStart = arr.indexOf(null);
                 this.nullLast += this.nullStart + 1;
+                console.log(this.nullStart, this.nullLast)
                 this.nullList.push(this.nullLast);
                 this.isNull(arr.slice(this.nullStart + 1));
             }
