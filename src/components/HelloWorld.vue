@@ -44,6 +44,11 @@ export default {
                 { 学号: "00003", 姓名: "王五", 性别: "男", 分数: 77 },
                 { 学号: "00004", 姓名: "赵六", 性别: "女", 分数: 55 }
             ];
+            allNum1.map(item=>{
+                var pj = "";
+                item["分数"]>=90 ? pj = "优秀" : (item["分数"]>=70 ? pj = "良好" : (item["分数"]>=60 ? pj = "及格" : pj = "不及格"))
+                item["评级"] = pj;
+            })
             /**
              * 再看看能不能判断每一个合并
              * 一行可以进行多次合并 注意需要合并的内容置null
@@ -58,8 +63,8 @@ export default {
             var aoa1 = [];
             download.openDownloadDialog(
                 download.sheet2blob([
-                    this.createSheet(allNum, aoa, "sheet1"),
-                    // this.createSheet(allNum1, aoa1, "sheet2")
+                    // this.createSheet(allNum, aoa, "sheet1"),
+                    this.createSheet(allNum1, aoa1, "sheet2")
                 ]), // 批量导出数据 sheetName要不同，不然会导出失败，报错
                 "导出.xlsx" // 导出表格的文件名
             );
@@ -69,7 +74,7 @@ export default {
              * @description 生成sheet文件
              * @author mrp
              * @date 2020-04-08
-             * @update mrp(2020-04-08)
+             * @update mrp(2020-11-12) 修改处理数据的方法
              * @params data{Array} 表格数据 aoa{Array} 表头数据 sheetName{String} sheet名
              * @return Object { sheetData{Object} sheet类型的对象 sheetName{String} sheet名 }
              */
@@ -109,15 +114,21 @@ export default {
                 }
             });
             // 如果表格内容也需要合并的话 可以放在上面的map前面
-            data.map(item => {
+            data.map((item, index) => {
                 // 当你的表头与表格需要显示表头相同时可以直接取表头的信息
                 // 如果不同请参考newWord.vue的处理方式，表头和表格体分开
-                aoa.push([
-                    item[aoa[topDateNum][0]],
-                    item[aoa[topDateNum][1]],
-                    item[aoa[topDateNum][2]],
-                    item[aoa[topDateNum][3]]
-                ]); 
+                aoa.push([]);
+                aoa[topDateNum].map(keyItem=>{
+                    aoa[topDateNum + index + 1].push(item[keyItem])
+                })
+                // console.log(aoaArr)
+                // aoa.push([
+                //     item[aoa[topDateNum][0]],
+                //     item[aoa[topDateNum][1]],
+                //     item[aoa[topDateNum][2]],
+                //     item[aoa[topDateNum][3]],
+                //     item[aoa[topDateNum][4]]
+                // ]); 
             });
             // hbLine.push({
             //     s: { r: 15, c: 8 },
