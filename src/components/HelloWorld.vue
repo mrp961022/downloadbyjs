@@ -121,7 +121,6 @@ export default {
                 aoa[topDateNum].map(keyItem=>{
                     aoa[topDateNum + index + 1].push(item[keyItem])
                 })
-                // console.log(aoaArr)
                 // aoa.push([
                 //     item[aoa[topDateNum][0]],
                 //     item[aoa[topDateNum][1]],
