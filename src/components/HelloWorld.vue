@@ -185,7 +185,6 @@ export default {
             if (arr.indexOf(null)>-1) {
                 this.nullStart = arr.indexOf(null);
                 this.nullLast += this.nullStart + 1;
-                console.log(this.nullStart, this.nullLast)
                 this.nullList.push(this.nullLast);
                 this.isNull(arr.slice(this.nullStart + 1));
             }
