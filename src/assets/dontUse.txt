@@ -1,0 +1,61 @@
+// csv转sheet对象 // 未使用
+  // csv2sheet(csv) {
+  //     var sheet = {}; // 将要生成的sheet
+  //     csv = csv.split("\n");
+  //     csv.forEach(function(row, i) {
+  //         row = row.split(",");
+  //         if (i == 0)
+  //             sheet["!ref"] =
+  //                 "A1:" +
+  //                 String.fromCharCode(65 + row.length - 1) +
+  //                 (csv.length - 1);
+  //         row.forEach(function(col, j) {
+  //             sheet[String.fromCharCode(65 + j) + (i + 1)] = { v: col };
+  //         });
+  //     });
+  //     return sheet;
+  // },
+  // 传入csv，执行后就会弹出下载框  // 未使用
+  // exportExcel(csv) {
+  //     var sheet = this.csv2sheet(csv);
+  //     var blob = this.sheet2blob(sheet);
+  //     openDownloadDialog(blob, "导出.xlsx");
+  // }
+  // 读取本地excel文件 未使用
+  // readWorkbookFromLocalFile(file, callback) {
+  //     var reader = new FileReader();
+  //     reader.onload = function(e) {
+  //         var data = e.target.result;
+  //         var workbook = XLSX.read(data, { type: "binary" });
+  //         if (callback) callback(workbook);
+  //     };
+  //     reader.readAsBinaryString(file);
+  // },
+  // 从网络上读取某个excel文件，url必须同域，否则报错 未使用
+  // readWorkbookFromRemoteFile(url, callback) {
+  //     var xhr = new XMLHttpRequest();
+  //     xhr.open("get", url, true);
+  //     xhr.responseType = "arraybuffer";
+  //     xhr.onload = function(e) {
+  //         if (xhr.status == 200) {
+  //             var data = new Uint8Array(xhr.response);
+  //             var workbook = XLSX.read(data, { type: "array" });
+  //             if (callback) callback(workbook);
+  //         }
+  //     };
+  //     xhr.send();
+  // },
+  // 读取excel文件 未使用
+  // outputWorkbook(workbook) {
+  //     var sheetNames = workbook.SheetNames; // 工作表名称集合
+  //     sheetNames.forEach(name => {
+  //         var worksheet = workbook.Sheets[name]; // 只能通过工作表名称来获取指定工作表
+  //         for (var key in worksheet) {
+  //             // v是读取单元格的原始值
+  //             console.log(
+  //                 key,
+  //                 key[0] === "!" ? worksheet[key] : worksheet[key].v
+  //             );
+  //         }
+  //     });
+  // },

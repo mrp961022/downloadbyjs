@@ -6,10 +6,17 @@
 
 <script>
 import { download } from "@/assets/js/download"; // 引入导出方法，方法只修改了可以批量导出，代码可能冗余
+import { createSheet as cs1 } from '@/assets/js/webDownload.js'
+
 export default {
     name: "hello",
     data() {
         return {
+            topData: [
+                ["主要信息", null, null, "其它信息", null, "中间"], // 特别注意合并的地方后面预留null
+                ["测试行", null, null, null], // 试试合并到头
+                ["测试合并", "在中间", null, "会不会有问题"], 
+            ], // 表头之上的内容，有合并
             studentOfClass1: [], // 表格数据
             classColumn: [
                 { label: "姓名", key: "name" },
@@ -57,28 +64,25 @@ export default {
              * @params {void}
              * @return {void}
              */
-
+            // cs1 支持合并表头信息
+            // createSheet 普通导出
             download.openDownloadDialog(
                 download.sheet2blob([
-                    this.createSheet(
-                        this.studentOfClass1,
-                        this.classColumn,
-                        "sheet1" // sheet页的名字 批量导出数据时 名字要不同，不然会导出失败，报错
-                    ) // createSheet 生成sheet文件，如果需要批量导出时多调用几次这个方法
+                    cs1(this.studentOfClass1,this.classColumn,this.topData,"sheet1"),
+                    this.createSheet(this.studentOfClass1,this.classColumn,"sheet2")
                 ]),
                 "导出.xlsx" // 导出表格的文件名
             );
         },
         createSheet(data, column, sheetName) {
             /**
-             * @description 生成sheet文件
-             * @author mrp
-             * @date 2020-04-10
-             * @update mrp(2020-04-10)
-             * @params data{Array} 表格数据 column{Array} 表头信息 sheetName{String} sheet名
-             * @return Object { sheetData{Object} sheet类型的对象 sheetName{String} sheet名 }
-             */
-
+                * @description 生成sheet文件
+                * @author mrp
+                * @date 2020-04-10
+                * @update mrp(2020-04-10)
+                * @params data{Array} 表格数据 column{Array} 表头信息 sheetName{String} sheet名
+                * @return Object { sheetData{Object} sheet类型的对象 sheetName{String} sheet名 }
+                */
             let aoa = [],
                 dataKey = []; // 定义导出表头和数据的键值
             aoa.push([]); // 第一行为表头信息
