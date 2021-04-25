@@ -1,3 +1,5 @@
+import XLSX from 'xlsx-js-style'
+
 let download = {
   // 将一个sheet转成最终的excel文件的blob对象，然后利用URL.createObjectURL下载
   /**

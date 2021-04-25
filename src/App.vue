@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <!-- 支持表格合并的导出 代码较多 -->
-        <HelloWorld />
+        <!-- <HelloWorld /> -->
         <!-- 普通导出 和主流ui库的table组件数据兼容较好 -->
         <NewWord />
     </div>

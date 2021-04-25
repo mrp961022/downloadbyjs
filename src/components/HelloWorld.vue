@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import XLSX from 'xlsx-js-style'
 import { download } from "@/assets/js/download";
 export default {
     name: "hello",
