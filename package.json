@@ -10,7 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "vue": "^2.5.2",
     "xlsx-js-style": "^1.0.0"
   },
